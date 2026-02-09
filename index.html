@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Вопросик 💛</title>
+
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Segoe UI', sans-serif;
+        background: linear-gradient(135deg, #1e3c72, #2a5298);
+        overflow: hidden;
+        color: white;
+        text-align: center;
+    }
+
+    .container {
+        animation: fadeIn 1.5s ease;
+    }
+
+    h1 {
+        font-size: 48px;
+        margin-bottom: 20px;
+    }
+
+    .emoji {
+        font-size: 90px;
+        margin-bottom: 20px;
+        animation: float 3s ease-in-out infinite;
+    }
+
+    .buttons {
+        margin-top: 30px;
+    }
+
+    button {
+        padding: 15px 30px;
+        font-size: 22px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        margin: 10px;
+        transition: 0.3s ease;
+    }
+
+    #yesBtn {
+        background-color: #00ff88;
+        color: black;
+        font-weight: bold;
+    }
+
+    #noBtn {
+        background-color: #ff4d6d;
+        color: white;
+    }
+
+    #yesBtn:hover {
+        transform: scale(1.1);
+    }
+
+    @keyframes float {
+        0% { transform: translateY(0); }
+        50% { transform: translateY(-15px); }
+        100% { transform: translateY(0); }
+    }
+
+    @keyframes shake {
+        0% { transform: translateX(0); }
+        25% { transform: translateX(-10px); }
+        50% { transform: translateX(10px); }
+        75% { transform: translateX(-10px); }
+        100% { transform: translateX(0); }
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <div class="emoji">🥺💛</div>
+    <h1>Ты любишь меня?</h1>
+
+    <div class="buttons">
+        <button id="yesBtn">Да</button>
+        <button id="noBtn">Нет</button>
+    </div>
+</div>
+
+<script>
+const noBtn = document.getElementById('noBtn');
+const yesBtn = document.getElementById('yesBtn');
+
+const noTexts = [
+    "Ты уверена? 😢",
+    "Подумай ещё раз...",
+    "Это точно нет? 🥺",
+    "Мне будет грустно...",
+    "Может всё-таки да? 😭",
+    "Я стараюсь...",
+    "Ну пожалуйста...",
+    "Последний шанс!",
+    "Ты разбиваешь мне сердце 💔",
+    "Ладно… но ты пожалеешь 😅"
+];
+
+let noIndex = 0;
+let yesSize = 1;
+
+noBtn.addEventListener('click', () => {
+    noBtn.innerText = noTexts[noIndex % noTexts.length];
+    noIndex++;
+
+    // Кнопка "Да" растёт
+    yesSize += 0.2;
+    yesBtn.style.transform = `scale(${yesSize})`;
+
+    // Тряска экрана
+    document.body.style.animation = "shake 0.4s";
+    setTimeout(() => {
+        document.body.style.animation = "";
+    }, 400);
+});
+
+yesBtn.addEventListener('click', () => {
+    document.body.innerHTML = `
+        <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;height:100vh;background:linear-gradient(135deg,#11998e,#38ef7d);color:white;font-family:sans-serif;text-align:center;">
+            <h1 style="font-size:60px;">Я знал(а)! 💚🥰</h1>
+            <p style="font-size:30px;">Ты сделала меня самым счастливым человеком!</p>
+            <div style="font-size:100px;animation: float 3s infinite;">💖💖💖</div>
+        </div>
+    `;
+});
+</script>
+
+</body>
+</html>
